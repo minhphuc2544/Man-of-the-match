@@ -1,8 +1,12 @@
 {
   "rewrites": [
     {
-      "source": "/api/proxy/(.*)",
-      "destination": "http://34.204.8.214:8080/api/$1"
+      "source": "/api/votes",
+      "destination": "http://34.204.8.214:8080/api/votes"
+    },
+     {
+      "source": "/api/stats",
+      "destination": "http://34.204.8.214:8080/api/stats"
     }
   ]
 }
