@@ -38,15 +38,6 @@
   background-color: rgba(255, 255, 255, 0.3);
 }
 
-.intro-title {
-  text-align: center;
-  z-index: 10;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-}
 
 .title-text {
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.7), 0 0 20px rgba(0, 0, 0, 0.5);
