@@ -7,6 +7,10 @@ const StatsPage = ({ onBackToVoting }) => {
   const [statsData, setStatsData] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [showResetModal, setShowResetModal] = useState(false)
+  const [resetPassword, setResetPassword] = useState("")
+  const [isResetting, setIsResetting] = useState(false)
+  const [resetError, setResetError] = useState("")
 
   useEffect(() => {
     fetchStats()
@@ -28,6 +32,53 @@ const StatsPage = ({ onBackToVoting }) => {
     } finally {
       setLoading(false)
     }
+  }
+
+  const handleResetVotes = async () => {
+    if (resetPassword !== "1485") {
+      setResetError("Incorrect password")
+      return
+    }
+
+    try {
+      setIsResetting(true)
+      setResetError("")
+
+      const response = await fetch("/api/reset", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ password: resetPassword }),
+      })
+
+      if (!response.ok) {
+        throw new Error("Failed to reset votes")
+      }
+
+      // Close modal and refresh stats
+      setShowResetModal(false)
+      setResetPassword("")
+      await fetchStats()
+
+      alert("Votes have been reset successfully!")
+    } catch (err) {
+      setResetError("Failed to reset votes. Please try again.")
+    } finally {
+      setIsResetting(false)
+    }
+  }
+
+  const openResetModal = () => {
+    setShowResetModal(true)
+    setResetPassword("")
+    setResetError("")
+  }
+
+  const closeResetModal = () => {
+    setShowResetModal(false)
+    setResetPassword("")
+    setResetError("")
   }
 
   if (loading) {
@@ -141,11 +192,56 @@ const StatsPage = ({ onBackToVoting }) => {
           <button onClick={fetchStats} className="refresh-button">
             Refresh Results
           </button>
+          <button onClick={openResetModal} className="reset-votes-button">
+            Reset All Votes
+          </button>
           <button onClick={onBackToVoting} className="back-to-voting-button">
             Vote Again
           </button>
         </div>
       </motion.div>
+
+      {/* Password Modal */}
+      {showResetModal && (
+        <div className="modal-overlay">
+          <motion.div
+            className="modal-content"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3 }}
+          >
+            <h3 className="modal-title">Reset All Votes</h3>
+            <p className="modal-description">
+              This action will permanently delete all voting data. Please enter the admin password to continue.
+            </p>
+
+            <div className="password-input-container">
+              <input
+                type="password"
+                value={resetPassword}
+                onChange={(e) => setResetPassword(e.target.value)}
+                placeholder="Enter admin password"
+                className="password-input"
+                onKeyPress={(e) => e.key === "Enter" && handleResetVotes()}
+              />
+              {resetError && <p className="error-text">{resetError}</p>}
+            </div>
+
+            <div className="modal-actions">
+              <button onClick={closeResetModal} className="cancel-button" disabled={isResetting}>
+                Cancel
+              </button>
+              <button
+                onClick={handleResetVotes}
+                className="confirm-reset-button"
+                disabled={isResetting || !resetPassword}
+              >
+                {isResetting ? "Resetting..." : "Reset Votes"}
+              </button>
+            </div>
+          </motion.div>
+        </div>
+      )}
     </div>
   )
 }
