@@ -233,6 +233,13 @@
   font-size: 1.125rem;
   color: #6b7280;
   font-style: italic;
+  margin-bottom: 1rem;
+}
+
+.countdown-message {
+  font-size: 0.875rem;
+  color: #9ca3af;
+  font-style: italic;
 }
 
 /* Voting UI Styles */
@@ -366,33 +373,6 @@
 .submit-vote-button:disabled {
   background-color: #9ca3af;
   cursor: not-allowed;
-}
-
-/* Results styles */
-.results-container {
-  background-color: white;
-  border-radius: 12px;
-  padding: 2rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.result-item {
-  padding: 1rem;
-  border-radius: 8px;
-  background-color: #f9fafb;
-  margin-bottom: 1rem;
-}
-
-.player-number-result {
-  width: 30px;
-  height: 30px;
-  background-color: #f0f0f0;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  color: #333;
 }
 
 /* Responsive adjustments */
