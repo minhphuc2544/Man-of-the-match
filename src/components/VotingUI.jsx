@@ -33,7 +33,7 @@ const VotingUI = ({ players, onVote, onShowStats }) => {
   // API function to submit votes
   const submitVotesToAPI = async (voteData) => {
     try {
-      const response = await fetch("/api/proxy/votes", {
+      const response = await fetch("/api/votes", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
