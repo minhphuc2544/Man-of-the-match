@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
 
-const VotingUI = ({ players, onVote }) => {
+const VotingUI = ({ players, onVote, onShowStats }) => {
   const [selectedPlayers, setSelectedPlayers] = useState([])
   const [hasVoted, setHasVoted] = useState(false)
   const [showSuccess, setShowSuccess] = useState(false)
@@ -79,12 +79,13 @@ const VotingUI = ({ players, onVote }) => {
         setHasVoted(true)
         setShowSuccess(true)
 
-        // Auto-hide success screen and reset to voting page after 3 seconds
+        // Auto-hide success screen and go to stats page after 3 seconds
         setTimeout(() => {
           setShowSuccess(false)
           setSelectedPlayers([])
           setHasVoted(false)
           setIsSubmitting(false)
+          onShowStats() // Navigate to stats page
         }, 3000)
       } catch (error) {
         alert("Failed to submit vote. Please try again.")
@@ -143,7 +144,7 @@ const VotingUI = ({ players, onVote }) => {
             animate={{ opacity: 1 }}
             transition={{ delay: 1.5, duration: 0.5 }}
           >
-            Returning to voting page...
+            Redirecting to results...
           </motion.div>
         </motion.div>
       </div>

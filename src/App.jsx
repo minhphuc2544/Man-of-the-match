@@ -3,10 +3,12 @@
 import { useState } from "react"
 import IntroAnimation from "./components/IntroAnimation"
 import VotingUI from "./components/VotingUI"
+import StatsPage from "./components/StatsPage"
 import "./App.css"
 
 function App() {
   const [introComplete, setIntroComplete] = useState(false)
+  const [showStats, setShowStats] = useState(false)
   const [players, setPlayers] = useState([
     { id: 9, name: "Tuan De lima", position: "Forward", votes: 0, image: "/images/player1.png" },
     { id: 4, name: "Anraujo", position: "Forward", votes: 0, image: "/images/player2.png" },
@@ -20,7 +22,6 @@ function App() {
     { id: 100, name: "Tuấn Anh", position: "Goalkeeper", votes: 0, image: "/images/player10.png" }
   ])
 
-  // Remove the onVote function since we're not tracking local votes anymore
   const handleVote = () => {
     // This function is no longer needed but kept for compatibility
   }
@@ -29,12 +30,22 @@ function App() {
     setIntroComplete(true)
   }
 
+  const handleShowStats = () => {
+    setShowStats(true)
+  }
+
+  const handleBackToVoting = () => {
+    setShowStats(false)
+  }
+
   return (
     <div className="app-container">
       {!introComplete ? (
         <IntroAnimation players={players} onComplete={() => setIntroComplete(true)} onSkip={skipIntro} />
+      ) : showStats ? (
+        <StatsPage onBackToVoting={handleBackToVoting} />
       ) : (
-        <VotingUI players={players} onVote={handleVote} />
+        <VotingUI players={players} onVote={handleVote} onShowStats={handleShowStats} />
       )}
     </div>
   )

@@ -242,6 +242,279 @@
   font-style: italic;
 }
 
+/* Stats Page Styles */
+.stats-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+  padding: 2rem;
+}
+
+.stats-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.stats-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.stats-title {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #1f2937;
+  margin-bottom: 1rem;
+}
+
+.stats-info {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.total-submissions,
+.last-updated {
+  font-size: 1rem;
+  color: #6b7280;
+  background-color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.chart-container {
+  background-color: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.chart-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.chart-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.chart-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.player-bar-container {
+  background-color: #f9fafb;
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid #e5e7eb;
+}
+
+.player-info-bar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.player-rank-badge {
+  width: 40px;
+  height: 40px;
+  background-color: #3b82f6;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.125rem;
+  margin-right: 1rem;
+}
+
+.player-details {
+  flex: 1;
+}
+
+.player-name-bar {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 0.25rem;
+}
+
+.player-position-bar {
+  font-size: 1rem;
+  color: #6b7280;
+}
+
+.player-stats {
+  text-align: right;
+}
+
+.total-points {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #059669;
+  display: block;
+}
+
+.total-votes {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.progress-bar-container {
+  height: 12px;
+  background-color: #e5e7eb;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.progress-bar {
+  height: 100%;
+  border-radius: 6px;
+  transition: width 0.8s ease;
+}
+
+.progress-bar.first-place {
+  background: linear-gradient(90deg, #ffd700, #ffed4e);
+}
+
+.progress-bar.second-place {
+  background: linear-gradient(90deg, #c0c0c0, #e5e7eb);
+}
+
+.progress-bar.third-place {
+  background: linear-gradient(90deg, #cd7f32, #d97706);
+}
+
+.progress-bar.other-place {
+  background: linear-gradient(90deg, #3b82f6, #60a5fa);
+}
+
+.vote-breakdown {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.breakdown-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+
+.breakdown-label {
+  font-size: 0.75rem;
+  color: #6b7280;
+  font-weight: 600;
+}
+
+.breakdown-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.stats-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.refresh-button,
+.back-to-voting-button {
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.refresh-button {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.refresh-button:hover {
+  background-color: #2563eb;
+}
+
+.back-to-voting-button {
+  background-color: #10b981;
+  color: white;
+}
+
+.back-to-voting-button:hover {
+  background-color: #059669;
+}
+
+.loading-container,
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #e5e7eb;
+  border-top: 4px solid #3b82f6;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+}
+
+.loading-text {
+  font-size: 1.125rem;
+  color: #6b7280;
+}
+
+.error-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #dc2626;
+  margin-bottom: 1rem;
+}
+
+.error-message {
+  font-size: 1rem;
+  color: #6b7280;
+  margin-bottom: 2rem;
+}
+
+.retry-button,
+.back-button {
+  padding: 0.75rem 1.5rem;
+  margin: 0.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+
+.retry-button {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.back-button {
+  background-color: #6b7280;
+  color: white;
+}
+
 /* Voting UI Styles */
 .voting-container {
   max-width: 800px;
@@ -395,6 +668,37 @@
 
   .success-title {
     font-size: 1.5rem;
+  }
+
+  .stats-container {
+    padding: 1rem;
+  }
+
+  .stats-title {
+    font-size: 2rem;
+  }
+
+  .stats-info {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .chart-container {
+    padding: 1rem;
+  }
+
+  .player-info-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .player-stats {
+    text-align: left;
+  }
+
+  .stats-actions {
+    flex-direction: column;
   }
 }
 
