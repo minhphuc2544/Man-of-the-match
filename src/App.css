@@ -38,10 +38,21 @@
   background-color: rgba(255, 255, 255, 0.3);
 }
 
+.intro-title {
+  text-align: center;
+  z-index: 10;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
 
 .title-text {
-  text-shadow: 0 0 10px rgba(0, 0, 0, 0.7), 0 0 20px rgba(0, 0, 0, 0.5);
-  letter-spacing: 1px;
+  color: #00ff88 !important;
+  text-shadow: 0 0 20px rgba(0, 255, 136, 0.8), 0 0 40px rgba(0, 255, 136, 0.6), 0 4px 8px rgba(0, 0, 0, 0.8);
+  letter-spacing: 2px;
+  font-weight: 800;
 }
 
 .player-animation-container {
@@ -124,6 +135,104 @@
   justify-content: center;
   gap: 2rem;
   width: 100%;
+}
+
+/* Success Screen Styles */
+.success-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #10b981, #059669);
+  padding: 2rem;
+}
+
+.success-card {
+  background-color: white;
+  border-radius: 16px;
+  padding: 3rem 2rem;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 100%;
+}
+
+.success-icon {
+  width: 80px;
+  height: 80px;
+  background-color: #10b981;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: white;
+  margin: 0 auto 1.5rem;
+  font-weight: bold;
+}
+
+.success-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 1.5rem;
+}
+
+.voted-players {
+  background-color: #f9fafb;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.voted-players-title {
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 1rem;
+}
+
+.voted-player-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.voted-player-item:last-child {
+  border-bottom: none;
+}
+
+.vote-rank {
+  width: 24px;
+  height: 24px;
+  background-color: #3b82f6;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.vote-player-name {
+  flex: 1;
+  text-align: left;
+  margin-left: 1rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.vote-points {
+  font-weight: 600;
+  color: #059669;
+}
+
+.success-message {
+  font-size: 1.125rem;
+  color: #6b7280;
+  font-style: italic;
 }
 
 /* Voting UI Styles */
@@ -298,6 +407,14 @@
 
   .voting-title {
     font-size: 1.75rem;
+  }
+
+  .success-card {
+    padding: 2rem 1rem;
+  }
+
+  .success-title {
+    font-size: 1.5rem;
   }
 }
 

@@ -7,6 +7,8 @@ const VotingUI = ({ players, onVote }) => {
   const [selectedPlayers, setSelectedPlayers] = useState([])
   const [hasVoted, setHasVoted] = useState(false)
   const [showResults, setShowResults] = useState(false)
+  const [showSuccess, setShowSuccess] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handlePlayerSelect = (playerId) => {
     if (hasVoted) return
@@ -29,22 +31,123 @@ const VotingUI = ({ players, onVote }) => {
     return index !== -1 ? index + 1 : null
   }
 
-  const handleSubmitVote = () => {
-    if (selectedPlayers.length > 0 && !hasVoted) {
-      // Update votes for each selected player
-      // First place (index 0) gets 3 points, second place gets 2, third place gets 1
-      selectedPlayers.forEach((playerId, index) => {
-        const points = 3 - index // 3, 2, 1 points based on position
-        onVote(playerId, points)
+  // API function to submit votes
+  const submitVotesToAPI = async (voteData) => {
+    try {
+      const response = await fetch("/api/votes", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(voteData),
       })
 
-      setHasVoted(true)
-      setShowResults(true)
+      if (!response.ok) {
+        throw new Error("Failed to submit votes")
+      }
+
+      return await response.json()
+    } catch (error) {
+      console.error("Error submitting votes:", error)
+      throw error
+    }
+  }
+
+  const handleSubmitVote = async () => {
+    if (selectedPlayers.length > 0 && !hasVoted && !isSubmitting) {
+      setIsSubmitting(true)
+
+      try {
+        // Prepare vote data for API
+        const voteData = {
+          votes: selectedPlayers.map((playerId, index) => {
+            const player = players.find((p) => p.id === playerId)
+            return {
+              playerId: playerId,
+              playerName: player.name,
+              position: player.position,
+              rank: index + 1, // 1st, 2nd, 3rd choice
+              points: 3 - index, // 3, 2, 1 points
+            }
+          }),
+          timestamp: new Date().toISOString(),
+          totalPlayers: selectedPlayers.length,
+        }
+
+        // Submit to API
+        await submitVotesToAPI(voteData)
+
+        // Update local state for UI
+        selectedPlayers.forEach((playerId, index) => {
+          const points = 3 - index // 3, 2, 1 points based on position
+          onVote(playerId, points)
+        })
+
+        setHasVoted(true)
+        setShowSuccess(true)
+
+        // Auto-hide success screen after 3 seconds
+        setTimeout(() => {
+          setShowSuccess(false)
+          setShowResults(true)
+        }, 3000)
+      } catch (error) {
+        alert("Failed to submit vote. Please try again.")
+        setIsSubmitting(false)
+      }
     }
   }
 
   // Sort players by votes for results display
   const sortedPlayers = [...players].sort((a, b) => b.votes - a.votes)
+
+  // Success Screen Component
+  if (showSuccess) {
+    return (
+      <div className="success-container">
+        <motion.div
+          className="success-card"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <motion.div
+            className="success-icon"
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 0.2, duration: 0.3 }}
+          >
+            ✓
+          </motion.div>
+
+          <h2 className="success-title">Vote Submitted Successfully!</h2>
+
+          <div className="voted-players">
+            <p className="voted-players-title">Your votes:</p>
+            {selectedPlayers.map((playerId, index) => {
+              const player = players.find((p) => p.id === playerId)
+              return (
+                <div key={playerId} className="voted-player-item">
+                  <span className="vote-rank">{index + 1}</span>
+                  <span className="vote-player-name">{player.name}</span>
+                  <span className="vote-points">{3 - index} points</span>
+                </div>
+              )
+            })}
+          </div>
+
+          <motion.div
+            className="success-message"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1, duration: 0.5 }}
+          >
+            Thank you for participating!
+          </motion.div>
+        </motion.div>
+      </div>
+    )
+  }
 
   return (
     <div className="voting-container">
@@ -96,10 +199,10 @@ const VotingUI = ({ players, onVote }) => {
 
               <button
                 onClick={handleSubmitVote}
-                disabled={selectedPlayers.length === 0 || hasVoted}
+                disabled={selectedPlayers.length === 0 || hasVoted || isSubmitting}
                 className="submit-vote-button"
               >
-                Submit Vote
+                {isSubmitting ? "Submitting..." : hasVoted ? "Vote Submitted" : "Submit Vote"}
               </button>
             </div>
           </>
@@ -126,7 +229,7 @@ const VotingUI = ({ players, onVote }) => {
                       <motion.div
                         className={`h-full ${index === 0 ? "bg-blue-600" : index === 1 ? "bg-blue-500" : "bg-blue-400"}`}
                         initial={{ width: 0 }}
-                        animate={{ width: `${(player.votes / 9) * 100}%` }} // Assuming max points is 9 (if everyone votes the same player 1st)
+                        animate={{ width: `${(player.votes / 9) * 100}%` }}
                         transition={{ duration: 1, delay: index * 0.2 }}
                       />
                     </div>
@@ -141,6 +244,8 @@ const VotingUI = ({ players, onVote }) => {
                   setShowResults(false)
                   setSelectedPlayers([])
                   setHasVoted(false)
+                  setShowSuccess(false)
+                  setIsSubmitting(false)
                 }}
                 className="px-6 py-2 bg-gray-200 hover:bg-gray-300 rounded-full text-gray-800 font-medium"
               >
