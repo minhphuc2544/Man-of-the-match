@@ -33,7 +33,7 @@ const VotingUI = ({ players, onVote, onShowStats }) => {
   // API function to submit votes
   const submitVotesToAPI = async (voteData) => {
     try {
-      const response = await fetch("http://localhost:8080/api/votes", {
+      const response = await fetch("http://34.204.8.214:8080/api/votes", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

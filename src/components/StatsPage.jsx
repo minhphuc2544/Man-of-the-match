@@ -15,7 +15,7 @@ const StatsPage = ({ onBackToVoting }) => {
   const fetchStats = async () => {
     try {
       setLoading(true)
-      const response = await fetch("http://localhost:8080/api/stats")
+      const response = await fetch("http://34.204.8.214:8080/api/stats")
 
       if (!response.ok) {
         throw new Error("Failed to fetch statistics")
