@@ -7,7 +7,7 @@ export async function GET(req, { params }) {
     headers: req.headers,
   });
 
-  const data = await response.text(); // or .json() if you're sure it's JSON
+  const data = await response.json(); // or .json() if you're sure it's JSON
 
   return new Response(data, {
     status: response.status,
@@ -19,7 +19,7 @@ export async function POST(req, { params }) {
   const path = params.path.join("/");
   const backendURL = `http://34.204.8.214:8080/api/${path}`;
 
-  const body = await req.text(); // or req.json() if JSON body
+  const body = await req.json(); // or req.json() if JSON body
 
   const response = await fetch(backendURL, {
     method: "POST",
@@ -27,7 +27,7 @@ export async function POST(req, { params }) {
     body,
   });
 
-  const data = await response.text();
+  const data = await response.json();
 
   return new Response(data, {
     status: response.status,
