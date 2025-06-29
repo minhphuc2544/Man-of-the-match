@@ -133,15 +133,15 @@ const IntroAnimation = ({ players, onComplete, onSkip }) => {
       <AnimatePresence mode="wait">
         {animationPhase === "initial" && (
           <motion.div
-            className="intro-title"
+            className="intro-text-container"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, scale: 1.5 }}
             transition={{ duration: 1 }}
             key="intro-title"
           >
-            <h1 className="text-5xl font-bold text-center text-white title-text">MATCH OF THE DAY</h1>
-            <h2 className="text-3xl font-semibold text-center text-white mt-4 title-text">PLAYER OF THE MATCH</h2>
+            <h1 className="intro-main-title">MATCH OF THE DAY</h1>
+            <h2 className="intro-sub-title">PLAYER OF THE MATCH</h2>
           </motion.div>
         )}
 
@@ -192,19 +192,19 @@ const IntroAnimation = ({ players, onComplete, onSkip }) => {
 
         {animationPhase === "final" && (
           <motion.div
-            className="intro-title"
+            className="intro-text-container"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1 }}
             key="final-intro"
           >
-            <h1 className="text-5xl font-bold text-center text-white title-text">VOTE NOW</h1>
+            <h1 className="intro-main-title">VOTE NOW</h1>
             <motion.div
               className="pulse-animation"
               animate={{ scale: [1, 1.1, 1] }}
               transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY }}
             >
-              <span className="text-2xl text-white arrow-text">⟶</span>
+              <span className="arrow-text">⟶</span>
             </motion.div>
           </motion.div>
         )}
