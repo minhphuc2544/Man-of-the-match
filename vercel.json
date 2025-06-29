@@ -2,15 +2,15 @@
   "rewrites": [
     {
       "source": "/api/votes",
-      "destination": "http://18.209.122.187:8080/api/votes"
+      "destination": "http://motm-production.up.railway.app/api/votes"
     },
     {
       "source": "/api/stats",
-      "destination": "http://18.209.122.187:8080/api/stats"
+      "destination": "http://motm-production.up.railway.app/api/stats"
     },
     {
       "source": "/api/reset",
-      "destination": "http://18.209.122.187:8080/api/reset"
+      "destination": "http://motm-production.up.railway.app/api/reset"
     }
   ]
 }
