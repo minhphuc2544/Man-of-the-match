@@ -133,13 +133,15 @@ const IntroAnimation = ({ players, onComplete, onSkip }) => {
       <AnimatePresence mode="wait">
         {animationPhase === "initial" && (
           <motion.div
-            className="w-full flex flex-col items-center bg-gradient-to-r from-blue-500 to-purple-600 p-8"
+            className="intro-title"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, scale: 1.5 }}
             transition={{ duration: 1 }}
+            key="intro-title"
           >
-            <h1 className="text-5xl font-bold text-white title-text">MATCH OF THE DAY</h1>
+            <h1 className="text-5xl font-bold text-center text-white title-text">MATCH OF THE DAY</h1>
+            <h2 className="text-3xl font-semibold text-center text-white mt-4 title-text">PLAYER OF THE MATCH</h2>
           </motion.div>
         )}
 
@@ -190,7 +192,7 @@ const IntroAnimation = ({ players, onComplete, onSkip }) => {
 
         {animationPhase === "final" && (
           <motion.div
-            className="final-intro"
+            className="intro-title"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1 }}
