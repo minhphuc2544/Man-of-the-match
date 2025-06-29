@@ -130,85 +130,87 @@ const IntroAnimation = ({ players, onComplete, onSkip }) => {
         Skip Intro
       </button>
 
-      <AnimatePresence mode="wait">
-        {animationPhase === "initial" && (
-          <motion.div
-            className="intro-text-container"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 1.5 }}
-            transition={{ duration: 1 }}
-            key="intro-title"
-          >
-            <h1 className="intro-main-title">MATCH OF THE DAY</h1>
-            <h2 className="intro-sub-title">PLAYER OF THE MATCH</h2>
-          </motion.div>
-        )}
-
-        {animationPhase === "players" && (
-          <div className="player-animation-container" key="player-animation">
+      <div className="intro-content-wrapper">
+        <AnimatePresence mode="wait">
+          {animationPhase === "initial" && (
             <motion.div
-              key={`player-${currentPlayerIndex}`}
-              className="player-spotlight"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
+              className="intro-text-centered"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 1.5 }}
+              transition={{ duration: 1 }}
+              key="intro-title"
             >
-              <motion.div
-                className="player-image-container relative"
-                initial={getPlayerAnimation(currentPlayerIndex).initial}
-                animate={getPlayerAnimation(currentPlayerIndex).animate}
-                exit={getPlayerAnimation(currentPlayerIndex).exit}
-                transition={getPlayerAnimation(currentPlayerIndex).transition}
-              >
-                <img
-                  src={players[currentPlayerIndex].image || "/placeholder.svg"}
-                  alt={players[currentPlayerIndex].name}
-                  className="player-image"
-                />
+              <h1 className="intro-main-title">MATCH OF THE DAY</h1>
+              <h2 className="intro-sub-title">PLAYER OF THE MATCH</h2>
+            </motion.div>
+          )}
 
-                {/* Dynamic light sweep effect */}
+          {animationPhase === "players" && (
+            <div className="player-animation-container" key="player-animation">
+              <motion.div
+                key={`player-${currentPlayerIndex}`}
+                className="player-spotlight"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+              >
                 <motion.div
-                  className={`absolute inset-0 ${getLightSweepAnimation(currentPlayerIndex).className}`}
-                  initial={getLightSweepAnimation(currentPlayerIndex).initial}
-                  animate={getLightSweepAnimation(currentPlayerIndex).animate}
-                  transition={getLightSweepAnimation(currentPlayerIndex).transition}
-                />
-              </motion.div>
+                  className="player-image-container relative"
+                  initial={getPlayerAnimation(currentPlayerIndex).initial}
+                  animate={getPlayerAnimation(currentPlayerIndex).animate}
+                  exit={getPlayerAnimation(currentPlayerIndex).exit}
+                  transition={getPlayerAnimation(currentPlayerIndex).transition}
+                >
+                  <img
+                    src={players[currentPlayerIndex].image || "/placeholder.svg"}
+                    alt={players[currentPlayerIndex].name}
+                    className="player-image"
+                  />
 
-              <motion.div
-                className="player-info-card"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-              >
-                <h2 className="player-name-text">{players[currentPlayerIndex].name}</h2>
-                <p className="player-position-text">{players[currentPlayerIndex].position}</p>
-              </motion.div>
-            </motion.div>
-          </div>
-        )}
+                  {/* Dynamic light sweep effect */}
+                  <motion.div
+                    className={`absolute inset-0 ${getLightSweepAnimation(currentPlayerIndex).className}`}
+                    initial={getLightSweepAnimation(currentPlayerIndex).initial}
+                    animate={getLightSweepAnimation(currentPlayerIndex).animate}
+                    transition={getLightSweepAnimation(currentPlayerIndex).transition}
+                  />
+                </motion.div>
 
-        {animationPhase === "final" && (
-          <motion.div
-            className="intro-text-container"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1 }}
-            key="final-intro"
-          >
-            <h1 className="intro-main-title">VOTE NOW</h1>
+                <motion.div
+                  className="player-info-card"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 }}
+                >
+                  <h2 className="player-name-text">{players[currentPlayerIndex].name}</h2>
+                  <p className="player-position-text">{players[currentPlayerIndex].position}</p>
+                </motion.div>
+              </motion.div>
+            </div>
+          )}
+
+          {animationPhase === "final" && (
             <motion.div
-              className="pulse-animation"
-              animate={{ scale: [1, 1.1, 1] }}
-              transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY }}
+              className="intro-text-centered"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1 }}
+              key="final-intro"
             >
-              <span className="arrow-text">⟶</span>
+              <h1 className="intro-main-title">VOTE NOW</h1>
+              <motion.div
+                className="pulse-animation"
+                animate={{ scale: [1, 1.1, 1] }}
+                transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY }}
+              >
+                <span className="arrow-text">⟶</span>
+              </motion.div>
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          )}
+        </AnimatePresence>
+      </div>
     </div>
   )
 }
