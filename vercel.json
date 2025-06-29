@@ -2,15 +2,15 @@
   "rewrites": [
     {
       "source": "/api/votes",
-      "destination": "http://34.204.8.214:8080/api/votes"
+      "destination": "http://18.209.122.187:8080/api/votes"
     },
     {
       "source": "/api/stats",
-      "destination": "http://34.204.8.214:8080/api/stats"
+      "destination": "http://18.209.122.187:8080/api/stats"
     },
     {
       "source": "/api/reset",
-      "destination": "http://34.204.8.214:8080/api/reset"
+      "destination": "http://18.209.122.187:8080/api/reset"
     }
   ]
 }
